@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NextStep – Quiz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container fade-in">
+    <h2>🧠 Let’s Get to Know You</h2>
+    <form id="quizForm">
+      <div id="quizContainer"></div>
+      <button class="start-btn" type="submit">Submit Quiz</button>
+    </form>
+  </div>
+
+  <script>
+    const branch = localStorage.getItem("branch") || "CSE";
+    const quizzes = {
+      CSE: [
+        { q: "What excites you the most?", o: ["Frontend", "Backend", "AI"] },
+        { q: "Which tool feels most natural to you?", o: ["HTML/CSS", "Python/DB", "Pandas/Colab"] },
+        { q: "What would you love to build?", o: ["Website", "Full-stack App", "AI Bot"] },
+        { q: "How do you feel about DSA?", o: ["Love it", "Okay", "Stressful"] },
+        { q: "Dream internship at?", o: ["Design team", "Startup backend", "ML lab"] }
+      ],
+      ECE: [
+        { q: "What area excites you most?", o: ["Signal Processing", "Embedded Systems", "Networks"] },
+        { q: "Preferred tool?", o: ["MATLAB", "Arduino", "NS2"] },
+        { q: "You love working on:", o: ["Signals", "IoT", "Telecom"] },
+        { q: "Best part of ECE?", o: ["Theory", "Hands-on", "Wireless"] },
+        { q: "Dream role?", o: ["Signal Analyst", "IoT Dev", "Comms Engineer"] }
+      ],
+      EEE: [
+        { q: "What do you enjoy more?", o: ["Circuit Design", "Control Systems", "Electrical Machines"] },
+        { q: "Which tool is your go-to?", o: ["Multisim", "PLC", "MATLAB"] },
+        { q: "What kind of project excites you?", o: ["Power Grid Simulation", "Automation", "EV Design"] },
+        { q: "DSA in Electrical context?", o: ["Logical", "Manageable", "Unclear"] },
+        { q: "Preferred domain?", o: ["Simulation", "Industrial Automation", "Green Energy"] }
+      ],
+      MECH: [
+        { q: "What area pulls your interest?", o: ["Thermodynamics", "CAD Design", "Fluid Mechanics"] },
+        { q: "Software you prefer?", o: ["AutoCAD", "SolidWorks", "Ansys"] },
+        { q: "Ideal project for you?", o: ["Engine redesign", "3D Modeling", "Simulation"] },
+        { q: "Hands-on or Simulation?", o: ["Both!", "Simulation", "Lab Work"] },
+        { q: "Dream job?", o: ["R&D", "Manufacturing", "Design"] }
+      ],
+      OTHER: [
+        { q: "What excites you most?", o: ["Creativity", "Problem-solving", "Analysis"] },
+        { q: "Preferred activity?", o: ["Designing", "Coding", "Research"] },
+        { q: "What inspires you?", o: ["Building things", "Making systems work", "Discovering insights"] },
+        { q: "Best part of learning?", o: ["Exploring", "Solving", "Reflecting"] },
+        { q: "Future dream?", o: ["Entrepreneur", "Engineer", "Data Scientist"] }
+      ]
+    };
+
+    const questions = quizzes[branch] || quizzes["OTHER"];
+    const container = document.getElementById("quizContainer");
+
+    questions.forEach((q, i) => {
+      const div = document.createElement("div");
+      div.innerHTML = `<p><strong>Q${i+1}: ${q.q}</strong></p>` +
+        q.o.map((opt, j) => `
+          <label><input type="radio" name="q${i}" value="${j}" required> ${opt}</label><br>`
+        ).join('');
+      container.appendChild(div);
+    });
+
+    document.getElementById("quizForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const responses = [];
+      for (let i = 0; i < questions.length; i++) {
+        responses.push(parseInt(formData.get(`q${i}`)));
+      }
+      const most = mode(responses);
+      const roleMap = ["frontend", "backend", "ai"];
+      const suggestion = roleMap[most] || "explorer";
+      localStorage.setItem("suggestion", suggestion);
+      window.location.href = "suggestion.html";
+    });
+
+    function mode(arr) {
+      return arr.reduce((a, b, i, arr) =>
+        arr.filter(v => v === a).length >= arr.filter(v => v === b).length ? a : b
+      );
+    }
+  </script>
+</body>
+</html>

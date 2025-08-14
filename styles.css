@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NextStep – Your Journey Starts Here</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #dbeafe, #fef9c3);
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      padding: 60px;
+      max-width: 700px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .tagline {
+      font-size: 18px;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .quote {
+      font-style: italic;
+      font-size: 16px;
+      color: #666;
+      margin: 20px 0;
+    }
+
+    .start-btn {
+      padding: 15px 30px;
+      font-size: 16px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .start-btn:hover {
+      background-color: #1d4ed8;
+    }
+
+    .highlight {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+
+    .time-tip {
+      margin-top: 25px;
+      font-weight: bold;
+      color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to <span class="highlight">NextStep</span></h1>
+    <p class="tagline">A place where your confusion ends—and your career journey begins.</p>
+    <p class="quote">“Every expert was once a beginner. Every beginner took the first step.”</p>
+    <p class="time-tip">⏳ You still have time—use it wisely. Each day matters.</p>
+    <a href="intro.html"><button class="start-btn">✨ Start Now</button></a>
+  </div>
+</body>
+</html>

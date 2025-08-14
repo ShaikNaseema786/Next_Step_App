@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome – NextStep</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container fade-in">
+    <h2>👋 Hello, <span id="nameDisplay"></span>!</h2>
+    <p>You’re in <span id="yearDisplay"></span> Year, <span id="semDisplay"></span> Sem, studying <strong><span id="branchDisplay"></span></strong>.</p>
+    <p id="branchMotivation" style="margin-top: 20px; font-style: italic;"></p>
+    <a href="quiz.html"><button class="start-btn">Take Quiz ➡️</button></a>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("name") || "Student";
+    const year = localStorage.getItem("year") || "-";
+    const sem = localStorage.getItem("sem") || "-";
+    const branch = localStorage.getItem("branch") || "Unknown";
+
+    document.getElementById("nameDisplay").textContent = name;
+    document.getElementById("yearDisplay").textContent = year;
+    document.getElementById("semDisplay").textContent = sem;
+    document.getElementById("branchDisplay").textContent = branch;
+
+    const motivation = {
+      CSE: "💻 CSE is the future. You have the tools to build, lead, and innovate in a digital world.",
+      ECE: "📡 ECE powers communication and devices. You're building the backbone of modern tech.",
+      EEE: "⚡ EEE keeps the world running. Energy, circuits, control—you’re the source of innovation.",
+      MECH: "⚙️ MECH is the heart of machines. From design to automation, the future moves with you.",
+      OTHER: "🌟 Every field has its heroes. Your branch is unique, and your journey is powerful."
+    };
+
+    document.getElementById("branchMotivation").textContent = motivation[branch] || motivation.OTHER;
+  </script>
+</body>
+</html>

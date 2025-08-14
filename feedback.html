@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NextStep – Final Words</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .feedback-tips {
+      background: #f0f9ff;
+      border-radius: 12px;
+      padding: 20px;
+      margin-top: 25px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    .feedback-tips ul {
+      text-align: left;
+      margin-left: 0;
+    }
+    .feedback-tips h3 {
+      color: #0f766e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container fade-in">
+    <h2>🌟 <span id="nameDisplay"></span>, your journey continues!</h2>
+    <p>You're stronger than you think. Let’s make the rest of your time count.</p>
+
+    <div class="feedback-tips" id="branchSuggestions"></div>
+
+    <h3 style="margin-top: 30px; color: #047857;">🌟 Final Motivation</h3>
+    <p style="font-style: italic; font-size: 16px;">You have time, talent, and drive. That’s all it takes to rise.</p>
+    <p style="font-weight: bold; color: #dc2626; font-size: 17px;">Never give up, <span id="nameAgain"></span>. We believe in your next step 💛</p>
+
+    <a href="index.html"><button class="start-btn">🔁 Restart</button></a>
+    <button class="start-btn" onclick="exitTab()">❌ Exit</button>
+
+    <p style="margin-top: 20px;">🌈 You’ve reached the end—for now. We’re always here when you’re ready for more 💫</p>
+    <p id="exitMsg" style="color:#b91c1c; margin-top:10px;"></p>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("name") || "Student";
+    const branch = localStorage.getItem("branch") || "CSE";
+    document.getElementById("nameDisplay").textContent = name;
+    document.getElementById("nameAgain").textContent = name;
+
+    const branchData = {
+      CSE: {
+        title: "💻 For Computer Science Students:",
+        tips: [
+          "Build 2 mini projects using HTML/CSS/JS",
+          "Practice 30 DSA problems this month",
+          "Apply for internships on Internshala, LinkedIn",
+          "Watch 1 full course on Udemy or FreeCodeCamp"
+        ]
+      },
+      ECE: {
+        title: "📡 For Electronics Students:",
+        tips: [
+          "Make one Arduino or Raspberry Pi based project",
+          "Explore IoT projects online (Hackster.io)",
+          "Watch NPTEL modules on Digital/Analog",
+          "Join a tech fest or workshop this semester"
+        ]
+      },
+      EEE: {
+        title: "⚡ For Electrical Students:",
+        tips: [
+          "Simulate 2 power circuits using Proteus",
+          "Try automation with PLC (YouTube projects)",
+          "Complete NPTEL’s Electrical Machines course",
+          "Follow industry trends on LinkedIn"
+        ]
+      },
+      MECH: {
+        title: "🛠 For Mechanical Students:",
+        tips: [
+          "Design 1 mechanical part using SolidWorks",
+          "Simulate flow using Ansys",
+          "Watch Learn Engineering + do 2 case studies",
+          "Update your resume with one internship task"
+        ]
+      }
+    };
+
+    const suggestion = branchData[branch];
+    if (suggestion) {
+      const branchDiv = document.getElementById("branchSuggestions");
+      const html = `
+        <h3>${suggestion.title}</h3>
+        <ul>${suggestion.tips.map(tip => `<li>${tip}</li>`).join('')}</ul>
+      `;
+      branchDiv.innerHTML = html;
+    }
+
+    function exitTab() {
+      try {
+        window.open('', '_self');
+        window.close();
+        setTimeout(() => {
+          document.getElementById("exitMsg").textContent = "Some browsers block automatic tab closing. Please close this tab manually.";
+        }, 500);
+      } catch (e) {
+        document.getElementById("exitMsg").textContent = "Could not close the tab. Please close it manually.";
+      }
+    }
+  </script>
+</body>
+</html>

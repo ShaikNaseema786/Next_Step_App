@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NextStep – Your Suggestion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container fade-in">
+    <h2>🌟 <span id="nameDisplay"></span>, your future looks bright!</h2>
+
+    <div class="card">
+      <h3>⏳ Time Left Before Graduation</h3>
+      <p id="timeEstimate"></p>
+    </div>
+
+    <div class="card" id="branchSuggestions"></div>
+
+    <div class="card" id="roleSuggestions"></div>
+
+    <div class="card">
+      <h3>🌈 Final Motivation</h3>
+      <p style="font-style: italic;">You’ve got time. You’ve got talent. All you need now is belief and daily steps.</p>
+      <p style="font-weight: bold; color: #dc2626;" id="nameAgainWrap"></p>
+    </div>
+
+    <a href="index.html"><button class="start-btn">🔁 Restart</button></a>
+    <button class="start-btn" onclick="exitTab()">❌ Exit</button>
+
+    <p id="exitMsg" style="color:#b91c1c; margin-top:10px;"></p>
+  </div>
+
+  <script>
+    const name = localStorage.getItem("name") || "Student";
+    const branch = localStorage.getItem("branch") || "OTHER";
+    const year = localStorage.getItem("year") || "4";
+    const sem = localStorage.getItem("sem") || "2";
+    const suggestion = localStorage.getItem("suggestion") || "explorer";
+
+    document.getElementById("nameDisplay").textContent = name;
+    document.getElementById("nameAgainWrap").innerHTML = `Never give up, <strong>${name}</strong>. We believe in you 💛`;
+
+    // Time left
+    let monthsLeft = 0;
+    const y = parseInt(year), s = parseInt(sem);
+    if (y === 4 && s === 2) monthsLeft = 1;
+    else monthsLeft = ((4 - y) * 2 + (2 - s)) * 6;
+    document.getElementById("timeEstimate").textContent = `You have approximately ${monthsLeft} month(s) – make every moment count!`;
+
+    // Branch-specific suggestions
+    const branchTips = {
+      CSE: ["Build 2 mini projects using HTML/CSS/JS", "Practice 30 DSA problems", "Watch a course on FreeCodeCamp", "Apply for internships on LinkedIn"],
+      ECE: ["Make one Arduino or Raspberry Pi project", "Explore IoT ideas on Hackster.io", "Join a tech fest", "Watch NPTEL modules"],
+      EEE: ["Simulate circuits using Proteus", "Try factory automation on YouTube", "Take NPTEL’s Machines course", "Update resume with 1 internship"],
+      MECH: ["Design with SolidWorks", "Simulate flow with Ansys", "Watch Learn Engineering", "Document 2 real-world case studies"],
+      OTHER: ["Stay consistent – 1 hour/day", "Explore YouTube on your interests", "Talk to seniors", "Join LinkedIn groups"]
+    };
+    const tips = branchTips[branch] || branchTips["OTHER"];
+    const tipHTML = `
+      <h3>📘 Tips for Your Branch</h3>
+      <ul>${tips.map(tip => `<li>${tip}</li>`).join('')}</ul>
+    `;
+    document.getElementById("branchSuggestions").innerHTML = tipHTML;
+
+    // Role-based learning
+    const roleInfo = {
+      frontend: {
+        title: "🎨 Frontend Developer",
+        skills: ["HTML, CSS, JS", "React or Vue", "Figma for UI", "APIs"],
+        salary: "₹4-6 LPA",
+        platforms: ["Frontend Masters", "FreeCodeCamp", "CodePen"]
+      },
+      backend: {
+        title: "⚙️ Backend Developer",
+        skills: ["Node.js, MongoDB", "Express", "API Auth", "Databases"],
+        salary: "₹5-8 LPA",
+        platforms: ["NodeSchool", "GeeksforGeeks", "Udemy"]
+      },
+      ai: {
+        title: "🧠 AI/ML Engineer",
+        skills: ["Python, Pandas", "ML Basics", "TensorFlow/PyTorch", "Model training"],
+        salary: "₹6-10 LPA",
+        platforms: ["Kaggle", "Google AI", "Coursera"]
+      },
+      explorer: {
+        title: "🔍 Explorer",
+        skills: ["Discover what excites you", "Experiment with side projects", "Talk to seniors"],
+        salary: "-",
+        platforms: ["YouTube", "Reddit", "Podcasts"]
+      }
+    };
+    const info = roleInfo[suggestion] || roleInfo["explorer"];
+    const roleHTML = `
+      <h3>${info.title}</h3>
+      <p><strong>🛠 Skills to Focus:</strong> ${info.skills.join(", ")}</p>
+      <p><strong>💰 Average Starting Salary:</strong> ${info.salary}</p>
+      <p><strong>📚 Platforms:</strong> ${info.platforms.join(", ")}</p>
+    `;
+    document.getElementById("roleSuggestions").innerHTML = roleHTML;
+
+    function exitTab() {
+      try {
+        window.open('', '_self');
+        window.close();
+        setTimeout(() => {
+          document.getElementById("exitMsg").textContent = "Your browser blocked auto close. Please close manually.";
+        }, 500);
+      } catch {
+        document.getElementById("exitMsg").textContent = "Could not close the tab. Please close it manually.";
+      }
+    }
+  </script>
+</body>
+</html>

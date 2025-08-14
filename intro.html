@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NextStep – Enter Details</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container fade-in">
+    <h2>🚀 Tell Us About You</h2>
+    <form id="introForm">
+      <input type="text" id="name" placeholder="Your Name" required><br><br>
+      <input type="text" id="year" placeholder="Your Year (e.g. 4th)" required><br><br>
+      <input type="text" id="sem" placeholder="Your Semester (e.g. 2nd)" required><br><br>
+      <select id="branch" required>
+        <option value="">Select Branch</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+        <option value="MECH">MECH</option>
+        <option value="OTHER">Other</option>
+      </select><br><br>
+      <button type="submit" class="start-btn">Continue</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("introForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const year = document.getElementById("year").value.trim();
+      const sem = document.getElementById("sem").value.trim();
+      const branch = document.getElementById("branch").value;
+
+      localStorage.setItem("name", name);
+      localStorage.setItem("year", year);
+      localStorage.setItem("sem", sem);
+      localStorage.setItem("branch", branch);
+
+      window.location.href = "welcome.html";
+    });
+  </script>
+</body>
+</html>
